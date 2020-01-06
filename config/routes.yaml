@@ -1,0 +1,3 @@
+index:
+   path: /{name}/{age}/{preference}
+   controller: App\Controller\DefaultController::index

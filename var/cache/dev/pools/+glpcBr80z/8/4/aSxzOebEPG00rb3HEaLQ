@@ -1,0 +1,42 @@
+<?php
+
+namespace Symfony\Component\VarExporter\Internal;
+
+return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
+    $o = [
+        clone (($p = &Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ManyToOne'] ?? Registry::p('Doctrine\\ORM\\Mapping\\ManyToOne')),
+        clone ($p['Doctrine\\ORM\\Mapping\\JoinColumn'] ?? Registry::p('Doctrine\\ORM\\Mapping\\JoinColumn')),
+        clone ($p['Symfony\\Component\\Validator\\Constraints\\Expression'] ?? Registry::p('Symfony\\Component\\Validator\\Constraints\\Expression')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'targetEntity' => [
+                'App\\Entity\\Account',
+            ],
+            'inversedBy' => [
+                'debitTransaction',
+            ],
+            'nullable' => [
+                1 => false,
+            ],
+            'message' => [
+                2 => 'This account cannot be debitted',
+            ],
+            'expression' => [
+                2 => 'this.getAmount()   <= value.getBalance()+value.getMountDebit()',
+            ],
+            'groups' => [
+                2 => [
+                    'Default',
+                ],
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[1],
+        $o[2],
+    ],
+    []
+);

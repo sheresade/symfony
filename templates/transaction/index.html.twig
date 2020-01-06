@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Transacciones{% endblock %}
+
+{% block body %}
+    
+    <h5>Debit transaction</h5>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Label</th>
+                <th>Owner</th>
+                <th>Category</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for debitransaction in account.debitTransaction %}
+            <tr>
+                <td>{{ debitransaction.id }}</td>
+                <td>{{ debitransaction.amount }}</td>
+                <td>{{ debitransaction.date ? debitransaction.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ debitransaction.label }}</td>
+                <td>{{ debitransaction.debitAccount.owner.lastName }}</td>
+                <td>{{ debitransaction.category.name }}</td>
+
+                <td>
+                    <a href="{{ path('transaction_show', {'id': debitransaction.id}) }}">show</a>
+                    <a href="{{ path('transaction_edit', {'id': debitransaction.id}) }}">edit</a>
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+     <h5>Credit transaction</h5>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Label</th>
+                <th>Owner</th>
+                <th>Category</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for creditTransaction in account.creditTransaction %}
+            <tr>
+                <td>{{ creditTransaction.id }}</td>
+                <td>{{ creditTransaction.amount }}</td>
+                <td>{{ creditTransaction.date ? creditTransaction.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ creditTransaction.label }}</td>
+                <td>{{ creditTransaction.creditAccount.owner.lastName }}</td>
+                <td>{{ creditTransaction.category.name }}</td>
+                <td>
+                    <a href="{{ path('transaction_show', {'id': creditTransaction.id}) }}">show</a>
+                    <a href="{{ path('transaction_edit', {'id': creditTransaction.id}) }}">edit</a>
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Beneficiaire{% endblock %}
+
+{% block body %}
+    <h3>Ajouter une nouveau Beneficiaire</h3>
+
+    {{ include('person/_form.html.twig') }}
+
+    <a class="btn btn-primary"  href="{{ path('person_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Person{% endblock %}
+
+{% block body %}
+    <h1>Person</h1>
+        <a href="{{ path('beneficiaire_new', {'id': person.id}) }}">Ajouter Beneficiaire</a>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Beneficiaire</th>
+            </tr>
+                {% for beneficiaire in person.beneficiaire %}
+            <tr>
+                <td>{{beneficiaire.iban}}</td> 
+            </tr>
+                {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}
